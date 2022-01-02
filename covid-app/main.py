@@ -80,12 +80,12 @@ island = {
         'title': 'Papua',
     }
 }
-island_select = Select(value=pulau, title='pulau', options=sorted(island.keys()))
+island_select = Select(value=pulau, title='Select Island', options=sorted(island.keys()))
 distribution_select = Select(value=distribution, title='Distribution', options=['Discrete', 'Smoothed'])
 
 df = pd.read_csv(join(dirname(__file__), 'data/covid.csv'))
 source = get_dataset(df, island[pulau]['Island'], distribution)
-plot = make_plot(source, "Covid cases for " + island[pulau]['Island'])
+plot = make_plot(source, "Covid cases for " + island[pulau]['Island'] + ' Island')
 
 island_select.on_change('value', update_plot)
 distribution_select.on_change('value', update_plot)
