@@ -67,11 +67,11 @@ island = {
     },
     'Sumatera': {
         'Island': 'Sumatera',
-        'title': 'Sumatera=',
+        'title': 'Sumatera',
     },
     'Kalimantan': {
         'Island': 'Kalimantan',
-        'title': 'Kalimantan, WA',
+        'title': 'Kalimantan',
     },
     'Papua': {
         'Island': 'Papua',
