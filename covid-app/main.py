@@ -1,10 +1,4 @@
-''' A weather chart for three island using a csv file.
-This illustration demonstrates different interpretation of the same data
-with the distribution option.
-.. note::
-    This example needs the Scipy and Pandas package to run. See
-    ``README.md`` for more information.
-'''
+
 import datetime
 from os.path import dirname, join
 
@@ -60,24 +54,28 @@ def update_plot(attrname, old, new):
     island = island_select.value
     plot.title.text = "Weather data for " + island[pulau]['title']
 
-    src = get_dataset(df, island[pulau]['airport'], distribution_select.value)
+    src = get_dataset(df, island[pulau]['Island'], distribution_select.value)
     source.data.update(src.data)
 
-pulau = 'Austin'
+pulau = 'Jawa'
 distribution = 'Discrete'
 
 island = {
-    'Austin': {
-        'airport': 'AUS',
-        'title': 'Austin, TX',
+    'Jawa': {
+        'Island': 'Jawa',
+        'title': 'Jawa',
     },
-    'Boston': {
-        'airport': 'BOS',
-        'title': 'Boston, MA',
+    'Sumatera': {
+        'Island': 'Sumatera',
+        'title': 'Sumatera=',
     },
-    'Seattle': {
-        'airport': 'SEA',
-        'title': 'Seattle, WA',
+    'Kalimantan': {
+        'Island': 'Kalimantan',
+        'title': 'Kalimantan, WA',
+    },
+    'Papua': {
+        'Island': 'Papua',
+        'title': 'Papua',
     }
 }
 
@@ -85,7 +83,7 @@ island_select = Select(value=pulau, title='pulau', options=sorted(island.keys())
 distribution_select = Select(value=distribution, title='Distribution', options=['Discrete', 'Smoothed'])
 
 df = pd.read_csv(join(dirname(__file__), 'data/covid.csv'))
-source = get_dataset(df, island[pulau]['airport'], distribution)
+source = get_dataset(df, island[pulau]['Island'], distribution)
 plot = make_plot(source, "Covid cases for " + island[pulau]['title'])
 
 island_select.on_change('value', update_plot)
