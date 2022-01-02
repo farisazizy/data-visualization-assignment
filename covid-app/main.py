@@ -34,7 +34,9 @@ def make_plot(source, title):
     plot = figure(x_axis_type="datetime", width=800, tools="", toolbar_location=None)
     plot.title.text = title
 
-    plot.line(x='Date', y='New Cases', source=source)
+    plot.line(x='Date', y='New Cases', source=source, legend_label="Cases", line_color="black", color=Blues4[2])
+    plot.line(x='Date', y='New Deaths', source=source, legend_label="Deaths",line_color="red", color=Blues4[1])
+    plot.line(x='Date', y='New Recovered', source=source, legend_label="Recovered",line_color="green", color=Blues4[0])
     '''
     plot.quad(top='New Cases', bottom='New Cases', left='left', right='right',
               color=Blues4[2], source=source, legend_label="Cases")
