@@ -25,9 +25,8 @@ def get_dataset(src, name, distribution):
     df.sort_index(inplace=True)
     if distribution == 'Smoothed':
         window, order = 51, 3
-        for key in STATISTICS:
+        for key in STATISTICS:#
             df[key] = savgol_filter(df[key], window, order)
-
     return ColumnDataSource(data=df)
 
 def make_plot(source, title):
@@ -37,14 +36,7 @@ def make_plot(source, title):
     plot.line(x='Date', y='New Cases', source=source, legend_label="Cases", line_color="black", color=Blues4[2])
     plot.line(x='Date', y='New Deaths', source=source, legend_label="Deaths",line_color="red", color=Blues4[1])
     plot.line(x='Date', y='New Recovered', source=source, legend_label="Recovered",line_color="green", color=Blues4[0])
-    '''
-    plot.quad(top='New Cases', bottom='New Cases', left='left', right='right',
-              color=Blues4[2], source=source, legend_label="Cases")
-    plot.quad(top='New Deaths', bottom='New Deaths', left='left', right='right',
-              color=Blues4[1], source=source, legend_label="Deaths")
-    plot.quad(top='New Recovered', bottom='New Recovered', left='left', right='right',
-              color=Blues4[0], alpha=0.5, line_color="black", source=source, legend_label="Recovered")
-    '''
+
     # fixed attributes
     plot.xaxis.axis_label = None
     plot.yaxis.axis_label = "Total"
