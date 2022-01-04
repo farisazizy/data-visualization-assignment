@@ -7,6 +7,8 @@ from scipy.signal import savgol_filter
 
 from bokeh.io import curdoc
 from bokeh.layouts import column, row
+from bokeh.models import BoxSelectTool
+
 from bokeh.models import ColumnDataSource, DataRange1d, Select
 from bokeh.palettes import Blues4
 from bokeh.plotting import figure
@@ -30,7 +32,7 @@ def get_dataset(src, name, distribution):
     return ColumnDataSource(data=df)
 
 def make_plot(source, title):
-    plot = figure(x_axis_type="datetime", width=800, tools="", toolbar_location=None)
+    plot = figure(x_axis_type="datetime", width=800, tools="pan,wheel_zoom,box_zoom,reset", toolbar_location='above')
     plot.title.text = title
 
     plot.line(x='Date', y='New Cases', source=source, legend_label="Cases", line_color="black", color=Blues4[2])
@@ -38,6 +40,8 @@ def make_plot(source, title):
     plot.line(x='Date', y='New Recovered', source=source, legend_label="Recovered",line_color="green", color=Blues4[0])
 
     # fixed attributes
+    plot.add_tools(BoxSelectTool(dimensions="width"))
+    
     plot.xaxis.axis_label = None
     plot.yaxis.axis_label = "Total"
     plot.axis.axis_label_text_font_style = "bold"
